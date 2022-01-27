@@ -1,19 +1,8 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
 
 export default function DayList() {
-  const [days, setDays] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:3001/days") // API 경로, 프로미스가 반환
-      .then((res) => {
-        // response는 http응답이고 실제 json은 아님
-        return res.json(); // 그래서 json메소드를 사용해서 json으로 변환
-      })
-      .then((data) => {
-        setDays(data);
-      });
-  }, []);
+  const days = useFetch("http://localhost:3001/days");
 
   return (
     <ul className="list_day">
