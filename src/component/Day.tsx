@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
-import Word from "./Word";
+import Word, { IWord } from "./Word";
 import useFetch from "../hooks/useFetch";
 
 export default function Day() {
-  const { day } = useParams();
-  const words = useFetch(`http://localhost:3001/words?day=${day}`);
+  const { day } = useParams<{ day: string }>();
+  const words: IWord[] = useFetch(`http://localhost:3000/words?day=${day}`);
 
   return (
     <>
@@ -12,7 +12,7 @@ export default function Day() {
       <table>
         <tbody>
           {words.map((word) => (
-            <Word word={word} key={word.ud} />
+            <Word word={word} key={word.id} />
           ))}
         </tbody>
       </table>
